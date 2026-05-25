@@ -389,6 +389,15 @@ export class ConnectivityManager {
       return 'auth'
     }
 
+    const originalError = (e as { cause?: unknown, originalError?: unknown })?.originalError
+      ?? (e as { cause?: unknown, originalError?: unknown })?.cause
+    if (originalError && originalError !== e) {
+      const originalKind = this.classify(originalError)
+      if (originalKind !== 'transient') {
+        return originalKind
+      }
+    }
+
     // Fallback for HTTP-level errors that august-yale leaves unwrapped
     // (e.g. server answered with a non-2xx without bare-401 semantics).
     const err = e as { statusCode?: number }

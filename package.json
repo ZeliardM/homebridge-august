@@ -2,7 +2,7 @@
   "name": "@homebridge-plugins/homebridge-august",
   "displayName": "August",
   "type": "module",
-  "version": "3.2.2",
+  "version": "4.0.0",
   "description": "The August plugin allows you to access your August & Yale device(s) from HomeKit.",
   "author": {
     "name": "donavanbecker",
@@ -46,8 +46,8 @@
     "lint": "eslint src --no-warn-ignored",
     "lint:fix": "eslint src --fix --no-warn-ignored",
     "watch": "npm run build && npm run plugin-ui && npm link && nodemon",
-    "plugin-ui": "rsync ./src/homebridge-ui/public/index.html ./dist/homebridge-ui/public/",
-    "build": "npm run clean && tsc && npm run plugin-ui && cp package.json dist/package.json || true",
+    "plugin-ui": "shx mkdir -p ./dist/homebridge-ui/public && shx cp ./src/homebridge-ui/public/index.html ./dist/homebridge-ui/public/",
+    "build": "npm run clean && tsc && npm run plugin-ui && shx cp package.json dist/package.json",
     "prepublishOnly": "npm run lint && npm run build && npm run plugin-ui && npm run docs && npm run docs:lint",
     "postpublish": "npm run clean && npm ci",
     "clean": "shx rm -rf ./dist",
@@ -80,5 +80,8 @@
     "typedoc": "^0.28.19",
     "typescript": "^6.0.3",
     "vitest": "^4.1.5"
+  },
+  "overrides": {
+    "node-persist": "^4.0.4"
   }
 }

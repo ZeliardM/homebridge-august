@@ -63,6 +63,7 @@ export interface device {
   SerialNumber: string
   LockStatus: LockStatus
   currentFirmwareVersion: string
+  keypad?: KeypadInfo
   homeKitEnabled: boolean
   zWaveEnabled: boolean
   isGalileo: boolean
@@ -81,6 +82,16 @@ export interface BatteryInfo {
   infoUpdatedDate: string
   lastChangeDate: string
   lastChangeVoltage: number
+}
+
+export interface KeypadInfo {
+  _id: string
+  serialNumber: string
+  lockID: string
+  currentFirmwareVersion?: string
+  battery?: Record<string, unknown>
+  batteryLevel?: 'Full' | 'Medium' | 'Low' | 'Very Low' | string
+  batteryRaw?: number
 }
 
 export interface HostLockInfo {
@@ -137,6 +148,7 @@ export interface devicesConfig extends device {
 }
 
 export interface lock {
+  hide_accesscode?: boolean
   hide_lock?: boolean
   hide_contactsensor?: boolean
 }
@@ -144,8 +156,10 @@ export interface lock {
 export interface lockDetails {
   lockName: string
   battery: number
+  batteryInfo?: BatteryInfo
   LockStatus: lockStatus
   currentFirmwareVersion: string
+  keypad?: KeypadInfo
 }
 
 export interface lockStatus {

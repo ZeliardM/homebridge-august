@@ -254,6 +254,14 @@
                       "condition": {
                         "functionBody": "return (model.options && model.options.devices && model.options.devices[arrayIndices].lockId && !model.options.devices[arrayIndices].hide_device);"
                       }
+                    },
+                    "hide_accesscode": {
+                      "title": "Hide Lock's Access Code Service",
+                      "description": "Allows you to hide HomeKit access-code management for locks that support entry codes.",
+                      "type": "boolean",
+                      "condition": {
+                        "functionBody": "return (model.options && model.options.devices && model.options.devices[arrayIndices].lockId && !model.options.devices[arrayIndices].hide_device);"
+                      }
                     }
                   }
                 },
@@ -474,6 +482,7 @@
             "options.devices[].overrideHomeKitEnabled",
             "options.devices[].lock.hide_lock",
             "options.devices[].lock.hide_contactsensor",
+            "options.devices[].lock.hide_accesscode",
             "options.devices[].firmware",
             {
               "key": "options.devices[].refreshRate",
